@@ -35,9 +35,9 @@ The system combines **LLMs, vector search, and PDF processing** to create an int
 | Authentication | JWT |
 
 ---
-```
+````
 # 📂 Project Structure
-
+```
 ai-knowledge-navigator/
 │
 ├── backend/
@@ -78,9 +78,9 @@ ai-knowledge-navigator/
 │ └── AuthContext.js
 │
 └── docker-compose.yml
-```
-````
 
+````
+```
 ---
 
 # ⚙️ Installation
