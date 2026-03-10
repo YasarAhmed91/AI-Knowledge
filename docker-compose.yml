@@ -1,0 +1,65 @@
+# ============================================================
+# AI Knowledge Navigator — Docker Compose
+# Runs: FastAPI + MongoDB + (optional) Redis
+# ============================================================
+
+version: "3.9"
+
+services:
+
+  # ── MongoDB ───────────────────────────────────────────────
+  mongodb:
+    image: mongo:7
+    container_name: knav_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ai_knowledge_navigator
+
+  # ── FastAPI Backend ────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: knav_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - uploads_data:/app/uploads
+      - faiss_data:/app/vector_store/indexes
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - DB_NAME=ai_knowledge_navigator
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production}
+      - AI_PROVIDER=${AI_PROVIDER:-openai}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - LLM_MODEL=${LLM_MODEL:-gpt-4o-mini}
+      - EMBED_MODEL=${EMBED_MODEL:-text-embedding-3-small}
+      - FRONTEND_URL=http://localhost:3000
+    depends_on:
+      - mongodb
+
+  # ── Frontend (Next.js / Vite) ─────────────────────────────
+  # Uncomment if containerizing the frontend:
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: knav_frontend
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=http://localhost:8000
+  #   depends_on:
+  #     - backend
+
+volumes:
+  mongo_data:
+  uploads_data:
+  faiss_data:
