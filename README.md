@@ -43,33 +43,41 @@ The system combines **LLMs, vector search, and PDF processing** to create an int
 ai-knowledge-navigator/
 │
 ├── backend/
-│   ├── main.py
-│   ├── database.py
-│   ├── models.py
-│   ├── routes/
-│   │   ├── auth.py
-│   │   ├── books.py
-│   │   ├── chat.py
-│   │   ├── search.py
-│   │   ├── analytics.py
-│   │   └── recommendations.py
-│   │
-│   ├── services/
-│   │   ├── pdf_processor.py
-│   │   ├── embeddings.py
-│   │   ├── rag_pipeline.py
-│   │   ├── ai_service.py
-│   │   └── recommendation.py
-│   │
-│   └── vector_store/
-│       └── faiss_index.py
+│ │
+│ ├── main.py
+│ ├── database.py
+│ ├── models.py
+│ │
+│ ├── routes/
+│ │ ├── auth.py
+│ │ ├── books.py
+│ │ ├── chat.py
+│ │ ├── search.py
+│ │ ├── analytics.py
+│ │ └── recommendations.py
+│ │
+│ ├── services/
+│ │ ├── pdf_processor.py
+│ │ ├── embeddings.py
+│ │ ├── rag_pipeline.py
+│ │ ├── ai_service.py
+│ │ └── recommendation.py
+│ │
+│ └── vector_store/
+│ └── faiss_index.py
 │
 ├── frontend/
-│   └── src/
-│       ├── App-integrated.jsx
-│       ├── api/
-│       ├── hooks/
-│       └── context/
+│ └── src/
+│ ├── App-integrated.jsx
+│ │
+│ ├── api/
+│ │ └── client.js
+│ │
+│ ├── hooks/
+│ │ └── index.js
+│ │
+│ └── context/
+│ └── AuthContext.js
 │
 └── docker-compose.yml
 
