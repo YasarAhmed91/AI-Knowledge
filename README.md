@@ -39,7 +39,7 @@ The system combines **LLMs, vector search, and PDF processing** to create an int
 # 📂 Project Structure
 
 ```
-
+```
 ai-knowledge-navigator/
 │
 ├── backend/
